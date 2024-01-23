@@ -62,3 +62,10 @@ docker build -t <name-image> .
 Задача:
 	 Перенести работоспособный  iso-файл в Docker. 
 
+sudo apt install squashfs-tools
+mkdir rootfs unsquashfs
+sudo mount -o loop ubuntu-22.04.3-live-server-amd64.iso rootfs
+find . -type f | grep filesystem.squashfs
+sudo unsquashfs -f -d unsquashfs/ rootfs/casper/filesystem.squashfs
+sudo tar -C unsquashfs/ -c . | docker import - ubuntu:iso
+docker run -it --rm ubuntu:iso /bin/bash
