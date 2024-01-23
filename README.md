@@ -56,7 +56,7 @@ docker build -t <name-image> .
 План работы:
 1. Скачать пакет debootstrap ``` sudo apt install debootstrap ```;
 2. Скачать образ с помощью debootstrap для работы с ним в CHROOT Linux ``` sudo debootstrap <name-OS> <name-dir> <http-OS> ```;
-3. Запускаем контейнер CHROOT ``` sudo chroot buster/ /bin/bash```, чтобы выйти из контейнера: ```exit```;
+3. Запускаем контейнер CHROOT ``` sudo chroot <name-dir> /bin/bash```, чтобы выйти из контейнера: ```exit```;
 4. Архивируем папку, которой лежить образ ```sudo tar -C <name-dir> -c . | docker import - <name-image>```;
 5. Запускаем контейнер, в основе которого лежит образ CHROOT-системы: ```docker run -it --name <name-container> <name-image> /bin/bash```
 
@@ -66,8 +66,9 @@ docker build -t <name-image> .
 
 1. Скачать пакет squashfs-tools ```sudo apt install squashfs-tools```;
 2. Создать папки ```mkdir rootfs unsquashfs```;
-sudo mount -o loop ubuntu-22.04.3-live-server-amd64.iso rootfs
-find . -type f | grep filesystem.squashfs
-sudo unsquashfs -f -d unsquashfs/ rootfs/casper/filesystem.squashfs
-sudo tar -C unsquashfs/ -c . | docker import - ubuntu:iso
-docker run -it --rm ubuntu:iso /bin/bash
+3. Рядом с этими папками положить iso файл;
+4. Монтировать iso-файл как блочное устройство в папку rootfs```sudo mount -o loop <name-iso> rootfs```;
+5. Проверить, что в папке rootfs лежит сжатая файловая система (squashfs) ```find rootfs/ -type f | grep filesystem.squashfs```;
+6. sudo unsquashfs -f -d unsquashfs/ rootfs/casper/filesystem.squashfs
+7. sudo tar -C unsquashfs/ -c . | docker import - ubuntu:iso
+8. docker run -it --rm ubuntu:iso /bin/bash
