@@ -1,6 +1,8 @@
 # Диплом
 Материалы по ВКР "Внедрение непрерывной интеграции программного обеспечения специального назначения на предприятии". 
+
 Автор: Служеникина Елена Юрьевна 
+
 Группа: РИ-400012
 
 ## Пример контейнера с поддержкой графического интерфейса приложения 
@@ -62,8 +64,8 @@ docker build -t <name-image> .
 Задача:
 	 Перенести работоспособный  iso-файл в Docker. 
 
-sudo apt install squashfs-tools
-mkdir rootfs unsquashfs
+1. Скачать пакет squashfs-tools ```sudo apt install squashfs-tools```;
+2. Создать папки ```mkdir rootfs unsquashfs```;
 sudo mount -o loop ubuntu-22.04.3-live-server-amd64.iso rootfs
 find . -type f | grep filesystem.squashfs
 sudo unsquashfs -f -d unsquashfs/ rootfs/casper/filesystem.squashfs
