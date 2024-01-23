@@ -51,3 +51,14 @@ docker build -t <name-image> .
 ## Пример переноса операционной системы с ее файлами из chroot системы в Docker image.
 Задача:
 	Перенести работоспособный Debian:10 из CHROOT в Docker. 
+План работы:
+1. Скачать пакет debootstrap ``` sudo apt install debootstrap ```;
+2. Скачать образ с помощью debootstrap для работы с ним в CHROOT Linux ``` sudo debootstrap <name-OS> <name-dir> <http-OS> ```;
+3. Запускаем контейнер CHROOT ``` sudo chroot buster/ /bin/bash```, чтобы выйти из контейнера: ```exit```;
+4. Архивируем папку, которой лежить образ ```sudo tar -C <name-dir> -c . | docker import - <name-image>```;
+5. Запускаем контейнер, в основе которого лежит образ CHROOT-системы: ```docker run -it --name <name-container> <name-image> /bin/bash```
+
+## Пример переноса iso файла в Docker image.
+Задача:
+	 Перенести работоспособный  iso-файл в Docker. 
+
