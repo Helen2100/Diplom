@@ -51,7 +51,7 @@
 Для запуска загрузки образа из Dockerfile:
 ```
 docker build -t <name-image> .
-# docker run -it --name <name-container> <name-image>
+docker run -it --name <name-container> <name-image>
 ```
 ### project_qt_2
 Необходимо использовать xhost на хосте для отображения наших приложений с графическим интерфейсом. Команда для подключения docker к xhost ```sudo xhost +local:docker```.
@@ -80,7 +80,7 @@ docker run --rm -it --name <name-container> --env DISPLAY=$DISPLAY --privileged 
 Для запуска загрузки образа из Dockerfile:
 ```
 docker build -t <name-image> .
-# docker run -it --name <name-container> <name-image>
+docker run -it --name <name-container> <name-image>
 ```
 
 ## Пример переноса операционной системы с ее файлами из chroot системы в Docker image.
