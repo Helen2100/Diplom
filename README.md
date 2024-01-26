@@ -62,20 +62,20 @@ docker run --name <name-container> -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tm
 ```
 ### project_qt_3
 Необходимо использовать xhost на хосте для отображения наших приложений с графическим интерфейсом. Команда для подключения docker к xhost ```sudo xhost +local:docker```.
-Необходимо проверить uid и gid в Dockerfile с uid и gid в хост системе. Для этого необходимо в хост системе прописать команду ```id```.
+Необходимо проверить uid и gid в Dockerfile с uid и gid в хост системе. Для этого необходимо в хост системе прописать команду ```id $USER ```.
 ```
-id
+id $USER 
 sudo xhost +local:docker
 docker buildx build --tag <name-image> --file ./Dockerfile .
 docker run --rm -it --name <name-container> --env DISPLAY=$DISPLAY --privileged --volume /tmp/.X11-unix:/tmp/.X11-unix <name-image>
 ```
 ### Отличие project_qt_2 от project_qt_3
-В project_qt_2 показана реализация подключения постоянной среды ```ENV QT_QPA_PLATFORM=xcb```.
-В project_qt_3 показана реализация подключения пользователя хост машины к docker образу.
+* В project_qt_2 показана реализация подключения постоянной среды ```ENV QT_QPA_PLATFORM=xcb```.
+* В project_qt_3 показана реализация подключения пользователя хост машины к docker образу.
 
-## Пример переноса сайта отдела в Docker контейнер.
+## Пример переноса сайта в Docker контейнер.
 Задача:
-Создать Dockerfile для проекта,  прописав в файле requirements.txt все зависимости. 
+Создать Dockerfile для проекта, прописав в файле requirements.txt все зависимости. 
 
 Для запуска загрузки образа из Dockerfile:
 ```
@@ -85,7 +85,7 @@ docker run -it --name <name-container> <name-image>
 
 ## Пример переноса операционной системы с ее файлами из chroot системы в Docker image.
 Задача:
-Перенести работоспособный Debian:10 из CHROOT в Docker. 
+Перенести работоспособную систему из CHROOT в Docker. 
 
 План работы:
 1. Скачать пакет debootstrap ``` sudo apt install debootstrap ```;
