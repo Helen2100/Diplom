@@ -105,7 +105,7 @@ docker run -it --name <name-container> <name-image>
 3. Рядом с этими папками положить iso файл;
 4. Монтировать iso-файл как блочное устройство в папку rootfs```sudo mount -o loop <name-iso> rootfs```;
 5. Проверить, что в папке rootfs лежит сжатая файловая система (squashfs) ```find rootfs/ -type f | grep filesystem.squashfs```;
-6. Использовать unsquashfs, чтобы извлечь файлы файловой системы в папку unsquashfs ```sudo unsquashfs -f -d unsquashfs/ rootfs/casper/filesystem.squashfs```;
+6. Использовать unsquashfs, чтобы извлечь файлы файловой системы в папку unsquashfs ```sudo unsquashfs -f -d unsquashfs/ <path/to/filesystem.squashfs>```;
 7. Cжать с помощью tar папку и импортировать образ с помощью docker ```sudo tar -C unsquashfs/ -c . | docker import - <name-image>```;
 8. Запустить контейнер, в основе которого лежит образ CHROOT-системы: ```docker run -it --name <name-container> <name-image> /bin/bash```
 
