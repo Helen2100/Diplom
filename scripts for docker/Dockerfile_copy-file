@@ -1,0 +1,7 @@
+ARG image
+
+FROM $image
+
+ENV QT_QPA_PLATFORM=xcb
+
+COPY . /

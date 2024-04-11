@@ -1,0 +1,10 @@
+ARG image
+
+FROM $image
+
+ENV QT_QPA_PLATFORM=xcb
+
+# sudo xhost +local:docker
+# docker buildx build --tag astra-project:server-client --file ./Dockerfile_4 .
+# docker run -it --name astra-qt-project -e DISPLAY=unix$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix astra-qt:base
+# docker image inspect --format "{{.RepoDigests}}" <name_image> # Узнать хэш образа
