@@ -37,4 +37,4 @@
 6.  Монтировать vdi-файл как блочное устройство в соданную нами папку ```sudo mount /dev/nbd0p3 <name-dir>```;
 7. Создать недостающие папки в ```<name-dir>```, например, ```mkdir lib32 lib64 libx32 media srv run sys```;
 8. Cжать с помощью tar папку и импортировать образ с помощью docker ```sudo tar -C <name-dir> -c . | docker import - <name-image>```;
-9. Запустить контейнер, в основе которого лежит образ CHROOT-системы: ```docker run -it --name <name-container> <name-image> /bin/bash```
+9. Запустить контейнер, в основе которого лежит образ vdi-файла: ```docker run -it --name <name-container> <name-image> /bin/bash```
