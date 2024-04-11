@@ -1,5 +1,0 @@
- 7AF25915 CMakeLists.txt
- 90D29048 main.cpp
- 84E1AB3B qt_boost_cmake
- FD447653 test_2_ufux.sh
- 78D40B50 ufix
