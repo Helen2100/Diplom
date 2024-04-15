@@ -1,0 +1,43 @@
+# docker-compose.yml
+version: '3.7'
+services:
+  web:
+    image: 'gitlab/gitlab-ce:latest'
+    restart: always
+    hostname: '192.168.0.168'
+    container_name: gitlab-ce
+    ports:
+      - '8080:80'
+      - '4432:443'
+      - '1522:22'
+    volumes:
+      - '$PWD/config:/etc/gitlab'
+      - '$PWD/logs:/var/log/gitlab'
+      - '$PWD/data:/var/opt/gitlab'
+    networks:
+      - gitlab
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner    
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - '$PWD/gitlab-runner:/etc/gitlab-runner'
+    networks:
+      - gitlab
+
+networks:
+  gitlab:
+    name: gitlab-network
+
+#docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
+#docker exec -it gitlab-runner gitlab-runner register --url "https://192.168.0.168:443/" --clone-url "https://192.168.0.168:443/"
+#docker exec -it gitlab-runner /bin/bash
+#gitlab-runner restart
+#gitlab-runner list
+#gitlab-runner verify --delete -t z487FLJBYjMk3zDmts1n -u http://gitlab-ce
+#gitlab-ctl reconfigure
+#gitlab-ctl restart
+
