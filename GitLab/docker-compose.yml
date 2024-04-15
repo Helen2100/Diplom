@@ -33,7 +33,7 @@ networks:
     name: gitlab-network
 
 #docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
-#docker exec -it gitlab-runner gitlab-runner register --url "https://192.168.0.168:443/" --clone-url "https://192.168.0.168:443/"
+#docker exec -it gitlab-runner gitlab-runner register --url "http://192.168.0.168:80/" --clone-url "http://192.168.0.168:80/"
 #docker exec -it gitlab-runner /bin/bash
 #gitlab-runner restart
 #gitlab-runner list
