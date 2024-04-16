@@ -4,7 +4,7 @@ services:
   web:
     image: 'gitlab/gitlab-ce:latest'
     restart: always
-    hostname: '192.168.0.168'
+    hostname: '158.160.87.198'
     container_name: gitlab-ce
     ports:
       - '8080:80'
@@ -33,7 +33,7 @@ networks:
     name: gitlab-network
 
 #docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
-#docker exec -it gitlab-runner gitlab-runner register --url "http://192.168.0.168:80/" --clone-url "http://192.168.0.168:80/"
+#docker exec -it gitlab-runner gitlab-runner register --url "http://158.160.87.198:80/" --clone-url "http://158.160.87.198:80/"
 #docker exec -it gitlab-runner /bin/bash
 #gitlab-runner restart
 #gitlab-runner list
